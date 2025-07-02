@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invitación de Cumpleaños</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background-image: url('https://images.unsplash.com/photo-1583337130417-3346a1c7e0c5?auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+    }
+
+    .info {
+      font-size: 1.3em;
+      margin-bottom: 2em;
+    }
+
+    .countdown {
+      font-size: 2em;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 15px 25px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      .info {
+        font-size: 1em;
+      }
+
+      .countdown {
+        font-size: 1.2em;
+        padding: 10px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>¡Estás invitado a mi cumpleaños!</h1>
+  <div class="info">
+    📅 <strong>Fecha:</strong> 26 de julio<br />
+    🕓 <strong>Hora:</strong> 16:00 hs<br />
+    📍 <strong>Lugar:</strong> PACURI<br />
+    👢 <strong>Dress Code:</strong> Yellowstone - Estilo Western
+  </div>
+
+  <div class="countdown" id="countdown">Cargando cuenta regresiva...</div>
+
+  <script>
+    const countdownElement = document.getElementById("countdown");
+    const eventDate = new Date("2025-07-26T16:00:00-03:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance <= 0) {
+        countdownElement.innerHTML = "¡Es hoy! ¡Nos vemos en PACURI!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `
+        Faltan ${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos
+      `;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
